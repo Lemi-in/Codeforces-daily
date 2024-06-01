@@ -12,4 +12,3 @@ for i in range(n):
     maxx = max(maxx, a[i])
 
 print(*a)
-
