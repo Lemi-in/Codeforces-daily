@@ -1,23 +1,21 @@
+from collections import deque
+
 n, days = map(int, input().split())
 arr = list(map(int, input().split()))
-lst = []
+q = deque()
+mx = 0
+idx = []
+l, r = 0, 0
 
-for i in range(n):
-    d = arr[i]
-    lst.append((d, i))
+while r < n:
+    q.append((arr[r], r))
+    while sum(x[0] for x in q) > days:
+        l += 1
+        q.popleft()
+    if len(q) > mx:
+        mx = len(q)
+        idx = sorted([x[1] + 1 for x in q])
+    r += 1
 
-lst.sort()
-
-result = []
-
-for i in range(n):
-    if days < lst[i][0]:
-        break
-    result.append(lst[i][1] + 1)
-    days -= lst[i][0]
-
-result.sort()
-
-print(len(result))
-print(*result)
-
+print(mx)
+print(*idx)

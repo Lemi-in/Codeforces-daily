@@ -1,14 +1,15 @@
 n = int(input())
-s = [input() for _ in range(n)]
-
-s.sort(key=lambda x: len(x))
+arr = []
+for _ in range(n):
+    arr.append(input() )
+temp = arr.copy()
+arr.sort(key=len)
 
 for i in range(n - 1):
-    if s[i + 1].find(s[i]) == -1:
-        print("NO")
+    if arr[i] not in arr[i + 1]:
+        print('NO')
         exit()
-
-print("YES")
-for char in s:
-    print(char)
+print('YES')
+for i in range(n):
+    print(arr[i])
 
