@@ -1,21 +1,21 @@
-
 t = int(input())
 for _ in range(t):
     n = int(input())
-    a = []
-    for _ in range(2 * n):
-        x = int(input())
-        a.append(x)
+    a = list(map(int, input().split()))
     
     a.sort()
+    m = n * 2
     pts = []
-    for i in range(n):
-        pts.append((a[i], a[i + n]))
-    
-    ans = 0
-    for i in range(1, n):
-        ans += abs(pts[i][0] - pts[i - 1][0]) + abs(pts[i][1] - pts[i - 1][1])
-    
-    print(ans)
-    for pt in pts:
-        print(pt[0], pt[1])
+    l , r = 0 , m - 1
+    while l < r:
+        pts.append((a[l],a[r]))
+        l += 1
+        r -= 1
+    sm = 0
+    for i in range(len(pts) - 1):
+        sm += abs(pts[i][0] - pts[i + 1][0])
+        sm += abs(pts[i][1] - pts[i + 1][1])
+    print(sm)
+    for x , y in pts:
+        print( x , y)
+
