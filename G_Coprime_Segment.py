@@ -1,24 +1,28 @@
-from math import gcd
-from functools import reduce
+# Template Author: Lemi
+import sys
+import heapq
+import math
+from collections import defaultdict, Counter, deque
+from bisect import bisect_left, bisect_right
+from math import ceil, sqrt, gcd
 
-def find(n, arr):
-    l = 0
-    curr = 0
-    mn = float('inf')
+def ls(): return sys.stdin.readline().split()
+def ints(): return map(int, sys.stdin.readline().split())
+def strs(): return map(str, sys.stdin.readline().split())
+def it(): return int(sys.stdin.readline())
+def s(): return sys.stdin.readline().strip()
+def li(): return list(map(int, sys.stdin.readline().split()))
+ 
+ 
+ 
+def solve():
+    n = it()
+    a = li()
 
-    for r in range(n):
-        curr = gcd(curr, arr[r])
-        
-        while curr == 1:
-            mn = min(mn, r - l + 1)
-            curr = reduce(gcd, arr[l+1:r+1], 0)  
-            l += 1
-
-    return mn if mn != float('inf') else -1
-
-
-n = int(input())
-arr = list(map(int, input().split()))
-
-
-print(find(n, arr))
+ 
+ 
+ 
+ 
+t = 1
+for _ in range(t):
+    solve()

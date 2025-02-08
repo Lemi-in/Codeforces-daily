@@ -1,30 +1,50 @@
-from collections import deque
+# Template Author: Lemi
+import sys
+import heapq
+import math
+from collections import defaultdict, Counter, deque
+from bisect import bisect_left, bisect_right
+from math import ceil, sqrt, gcd
 
-def find_subarray_count(n, k, arr):
-    mn = deque()
-    mx = deque()
-    ans = 0
+def ls(): return sys.stdin.readline().split()
+def ints(): return map(int, sys.stdin.readline().split())
+def strs(): return map(str, sys.stdin.readline().split())
+def it(): return int(sys.stdin.readline())
+def s(): return sys.stdin.readline().strip()
+def li(): return list(map(int, sys.stdin.readline().split()))
+ 
+def solve():
+    
+    n , k = ints()
+    arr = li()
+
+    max_heap = []
+    min_heap = []
+
+    removed = defaultdict(int)
+
     l = 0
+    segments = 0
+    for r in range(n):
+        heapq.heappush(min_heap, arr[r])
+        heapq.heappush(max_heap, -arr[r])
 
-    for i in range(n):
-        while mn and arr[mn[-1]] > arr[i]:
-            mn.pop()
-        while mx and arr[mx[-1]] < arr[i]:
-            mx.pop()
-        mn.append(i)
-        mx.append(i)
-
-        while arr[mx[0]] - arr[mn[0]] > k:
+        while -max_heap[0] - min_heap[0] > k:
+            removed[arr[l]] += 1
             l += 1
-            if mx[0] < l:
-                mx.popleft()
-            if mn[0] < l:
-                mn.popleft()
 
-        ans += (i - l + 1)
+            while max_heap and removed[-max_heap[0]] > 0:
+                removed[-max_heap[0]] -= 1
+                heapq.heappop(max_heap)
 
-    return ans
+            while min_heap and removed[min_heap[0]] > 0:
+                removed[min_heap[0]] -= 1
+                heapq.heappop(min_heap)
+        segments += ( r - l + 1)
 
-n, k = map(int, input().split())
-arr = list(map(int, input().split()))
-print(find_subarray_count(n, k, arr))
+    print(segments)
+ 
+ 
+t = 1
+for _ in range(t):
+    solve()
