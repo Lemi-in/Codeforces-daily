@@ -18,22 +18,23 @@ def solve():
     arr = li()
     
     mp = Counter(arr)  
-    vals = [val for val in mp.values()]
-    vals.sort()
-    uniQ = sorted(set(vals))  
+    uniQ = set(mp.values())
     mn = n  
    
     for u in uniQ:
         remove = 0
-        for f in vals:
+        for f in mp.values():
             if f < u:
                 remove += f
             else:
                 remove += f - u
         mn = min(mn, remove)
+        
 
     print(mn)
 
 t = it()
 for _ in range(t):
     solve()
+
+print(83 * 83)

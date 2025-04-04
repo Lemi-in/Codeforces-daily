@@ -1,0 +1,106 @@
+Some properties of bitwise operations:
+
+a|b = a⊕b + a&b
+a⊕(a&b) = (a|b)⊕b
+b⊕(a&b) = (a|b)⊕a
+(a&b)⊕(a|b) = a⊕b
+
+Addition:
+
+a+b = a|b + a&b
+a+b = a⊕b + 2(a&b)
+
+Subtraction:
+
+a-b = (a⊕(a&b))-((a|b)⊕a)
+a-b = ((a|b)⊕b)-((a|b)⊕a)
+a-b = (a⊕(a&b))-(b⊕(a&b))
+a-b = ((a|b)⊕b)-(b⊕(a&b))
+
+
+
+
+
+
+
+
+
+
+
+
+
+After recently concluded hacker cup qualification round I thought I would take a little rest from problem solving.But as I have some geniuses like srlabib around me I couldn't resist myself from thinking about some Bitwise Equations!!!
+
+Most of the part is done by srlabib and I also contributed some from my side ( Especially the last one ) :
+
+a+b = a|b + a&b
+Now this is a very basic thing.This was a very crucial part in the last contests's problem D ( Take a Guess ).But how did we get this? Suppose we have two binary numbers 1010 and 0101, there is no chance of any carry in binary addition.In that case we can write :
+
+a+b =a|b
+
+But when we have carry, suppose we have : 1101(a) and 0101(b) then a & b works as the carry which we add further and the equation turns into :
+
+a+b=a|b + a&b
+
+Now I will talk about the sum-xor property :
+
+a+b=a⊕b+2(a&b)
+Well where does it come from?
+
+It comes from the first equation that I described.But now let's break a & b here and bring xor into action:
+
+We can express a | b as a⊕b + a&b which brings the equation :
+
+a+b=a⊕b+2(a&b)
+
+Now the last one : It is a special one for me because I derived it with my own hands, that is :
+
+a-b=a-(a&b)-x
+Now what is x?
+
+x is a number which I created by turning the bits on in positions where a has bit 0 and b has bit 1
+
+Now how did I get this equation?Here is how :
+
+Imagine two binary numbers : a : 11010 b : 01110
+
+we can write b as : 01010(a &b) + 00100(x) which leads us to the equation :
+
+a-b=a-(a&b)-x
+
+UPD : x is basically (bitwise not of a) & b
+
+UPD : srlabib has come up with two more equations :
+
+a^(a&b) = (a|b)^b
+b^(a&b) = (a|b)^a
+UPD :
+
+Here are some more equations of subtraction using bitwise operators by srlabib!
+
+As :
+
+a-b = a-(a&b)-x
+
+Here a-(a&b) and (a⊕(a&b)) are actually the same!
+
+and x = (a|b)⊕a
+
+So now it is clear that
+
+a-b = (a⊕(a&b)) — ((a|b)⊕a)
+Now
+
+a⊕(a&b) = (a|b)⊕b
+
+b⊕(a&b) = (a|b)⊕a
+
+Using these two properties we can build four equations!
+
+a-b = (a⊕(a&b)) — ((a|b)⊕a)
+
+a-b = ((a|b)⊕b) — ((a|b)⊕a)
+
+a-b = (a⊕(a&b)) — (b⊕(a&b))
+
+a-b = ((a|b)⊕b) — (b⊕(a&b))
