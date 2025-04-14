@@ -12,6 +12,7 @@ def query(i):
         sys.exit("❌ Received empty string — likely a flush/input mismatch or interactor error.")
     return s
 
+
 def main():
     try:
         n, h = input().split()
